@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的收藏</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <link rel="stylesheet" href="media/layui/css/layui.css">
+    <link rel="stylesheet" href="media/css/global.css">
+    <script src="media/js/jquery.min.js"></script>
+    <script src="media/js/jiazai.js"></script>
+    <script src="media/js/setside.js"></script>
+    <script>
+        $(function () {
+            set(5)
+        })
+    </script>
+</head>
+
+<body>
+
+<section id="head"></section>
+
+<div class="layui-container fly-marginTop fly-user-main">
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user" id="side" >
+    </ul>
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <ul class="layui-tab-title" id="LAY_mine">
+                <li class="layui-this" lay-id="send">我的发帖</li>
+                <li lay-id="reply">我的回帖</li>
+            </ul>
+            <div class="layui-tab-content" style="padding: 20px 0;">
+                <div class="layui-form layui-form-pane layui-tab-item layui-show">
+
+                    <div class="layui-container">
+                        <table id="tbdata1"></table>
+                    </div>
+                    <script src="media/layui/layui.js"></script>
+                    <script>
+                        layui.use('table', function() {
+                            var table = layui.table;
+                            //第一个实例
+                            table.render({
+                                elem : '#tbdata',
+                                url : 'pagesend.do', //数据接口
+                                cellMinWidth:100,
+                                page : true, //开启分页
+                                cols : [ [ //表头
+                                    {
+                                        field : 'id',
+                                        title : '序号',
+                                        align : 'center',
+                                        sort : true,
+                                        fixed : 'left'
+                                    }, {
+                                        field : 'name',
+                                        align : 'center',
+                                        title : '学科名称'
+                                    }, {
+                                        field : 'week',
+                                        title : '学科周期',
+                                        align : 'center',
+                                        sort : true
+                                    }, {
+                                        field : 'createtime',
+                                        title : '成立日期',
+                                        align : 'center',
+                                        sort : true
+                                    }, {
+                                        field : 'type',
+                                        title : '学科类型',
+                                        align : 'center',
+                                    }, {
+                                        field : 'right',
+                                        title : '操作',
+                                        align : 'center',
+                                        toolbar : "#barop1"
+                                    } ] ]
+                            });
+                            //监听工具条
+                            table.on('tool(tbop)', function(obj) {
+                                var data = obj.data;
+                                if (obj.event === 'del') {
+                                    layer.confirm('是否确认删除?', function(index) {
+                                        $.ajax({
+                                            url : "coursedelete.do",
+                                            type : "POST",
+                                            data : "id=" + data.id,
+                                            success : function(data) {
+                                                if (data.code == 1000) {
+                                                    obj.del();//删除表格中的对应行数据
+                                                    layer.close(index);
+                                                    layer.msg("删除成功", {
+                                                        icon : 6
+                                                    });
+                                                } else {
+                                                    layer.msg("删除失败", {
+                                                        icon : 5
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    });
+                                } else if (obj.event === 'edit') {//编辑 修改
+                                    location.href = "courseupdate.html?d="
+                                        + encodeURI(JSON.stringify(data));
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+
+                <div class="layui-form layui-form-pane layui-tab-item">
+                    <div class="layui-container">
+                        <table id="tbdata" lay-filter="tbop"></table>
+                        <script type="text/html" id="barop">
+                            <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+                            <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+                        </script>
+                    </div>
+                    <script src="media/layui/layui.js"></script>
+                    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+                    <script>
+                        layui.use('table', function() {
+                            var table = layui.table;
+
+                            //第一个实例
+                            table.render({
+                                elem : '#tbdata',
+                                url : 'coursepage.do', //数据接口
+                                cellMinWidth:100,
+                                page : true, //开启分页
+                                cols : [ [ //表头
+                                    {
+                                        field : 'id',
+                                        title : '序号',
+                                        align : 'center',
+                                        sort : true,
+                                        fixed : 'left'
+                                    }, {
+                                        field : 'name',
+                                        align : 'center',
+                                        title : '学科名称'
+                                    }, {
+                                        field : 'week',
+                                        title : '学科周期',
+                                        align : 'center',
+                                        sort : true
+                                    }, {
+                                        field : 'createtime',
+                                        title : '成立日期',
+                                        align : 'center',
+                                        sort : true
+                                    }, {
+                                        field : 'type',
+                                        title : '学科类型',
+                                        align : 'center',
+                                    }, {
+                                        field : 'right',
+                                        title : '操作',
+                                        align : 'center',
+                                        toolbar : "#barop"
+                                    } ] ]
+                            });
+                            //监听工具条
+                            table.on('tool(tbop)', function(obj) {
+                                var data = obj.data;
+                                if (obj.event === 'del') {
+                                    layer.confirm('是否确认删除?', function(index) {
+                                        $.ajax({
+                                            url : "coursedelete.do",
+                                            type : "POST",
+                                            data : "id=" + data.id,
+                                            success : function(data) {
+                                                if (data.code == 1000) {
+                                                    obj.del();//删除表格中的对应行数据
+                                                    layer.close(index);
+                                                    layer.msg("删除成功", {
+                                                        icon : 6
+                                                    });
+                                                } else {
+                                                    layer.msg("删除失败", {
+                                                        icon : 5
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    });
+                                } else if (obj.event === 'edit') {//编辑 修改
+                                    location.href = "courseupdate.html?d="
+                                        + encodeURI(JSON.stringify(data));
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<section id="footer"></section>
+
+<script src="media/layui/layui.js"></script>
+<script>
+    layui.cache.page = 'user';
+    layui.config({
+        version: "2.0.0"
+        , base: 'media/mods/'
+    }).extend({
+        fly: 'index'
+    }).use('fly');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="media/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="media/css/font-awesome.min.css"
+	media="all">
+<script type="text/javascript" src="media/js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$.get("staffcount.do", "", function(obj) {
+			$("#s2").text(obj)
+		})
+		$.get("gradecount.do", "", function(obj) {
+			$("#s3").text(obj)
+		})
+		$.get("studentcount.do", "", function(obj) {
+			$("#s4").text(obj)
+		})
+	})
+</script>
+<link rel="stylesheet" href="media/css/main.css">
+</head>
+
+<body>
+	<div class="layui-fluid main">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md3">
+				<div class="info-box">
+					<span class="info-box-icon"
+						style="background-color: #00c0ef !important; color: white;">
+						<i class="fa fa-child"></i>
+					</span>
+					<div class="info-box-content">
+						在线人数<span class="info-box-number" id="s1">0</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="layui-col-md3">
+				<div class="info-box">
+					<span class="info-box-icon"
+						style="background-color: #00a65a !important; color: white;"><i
+						class="fa fa-users" aria-hidden="true"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">员工人数</span> <span
+							class="info-box-number" id="s2">0</span>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md3">
+				<div class="info-box">
+					<span class="info-box-icon"
+						style="background-color: #f39c12 !important; color: white;"><i
+						class="fa fa-users" aria-hidden="true"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">在读班级</span> <span
+							class="info-box-number" id="s3">0</span>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-md3">
+				<div class="info-box">
+					<span class="info-box-icon"
+						style="background-color: #dd4b39 !important; color: white;"><i
+						class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">毕业学员</span> <span
+							class="info-box-number" id="s4">0</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-row">
+			<div class="layui-col-md12">
+				<h2>系统使用状态 ： 当前342人在线，共打开598个页面</h2>
+			</div>
+		</div>
+		<div>
+			<table class="layui-table" id="tbdata"></table>
+
+		</div>
+	</div>
+	<script src="media/layui/layui.js"></script>
+	<script>
+		layui.use('table', function() {
+			var table = layui.table;
+			//第一个实例
+			table.render({
+				elem : '#tbdata',
+				height : 315,
+				url : 'getip.do', //数据接口
+				page : true,//开启分页
+				cols : [ [ //表头
+			 {
+					field : 'no',
+					align : 'center',
+					title : '登录账户',
+				}, {
+					field : 'ip',
+					align : 'center',
+					title : '登录IP'
+				}, {
+					field : 'location',
+					align : 'center',
+					title : '登录城市'
+				}, {
+					field : 'lasttime',
+					align : 'center',
+					title : '登录时间',
+					sort : true,
+				} ] ]
+			});
+
+		});
+	</script>
+</body>
+
+</html>

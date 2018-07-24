@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>修改信息</title>
+		<!-- layui.css -->
+		<link href="/media/layui/css/layui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div style="padding: 25px 50px 25px 0px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<input type="text" id="lblid" name="lblid" placeholder="" autocomplete="off" readonly="true" class="layui-input layui-hide ">
+					<label class="layui-form-label">姓名</label>
+					<div class="layui-input-block">
+						<input id="Name" type="text" name="Name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">地址</label>
+					<div class="layui-input-block">
+						<input id="Address" type="text" name="Address" required lay-verify="required" placeholder="请输入地址" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">一句话说明</label>
+					<div class="layui-input-block">
+						<input id="Oneword" type="text" name="Oneword" placeholder="请输入资源简介" class="layui-input"></input>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">头像</label>
+					<input id="imgurl" type="text" name="imgurl" class="layui-input layui-hide">
+					<img id="imgpic" src="/media/images/pic.png" onerror="errorImg(this)" height="60px" />
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">Git</label>
+					<div class="layui-input-block">
+						<input id="Git" type="text" name="Git" placeholder="请输入Git地址" class="layui-input"></input>
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">QQ</label>
+					<div class="layui-input-block">
+						<input id="Qq" type="text" name="Qq" placeholder="请输入QQ" class="layui-input"></input>
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">Email</label>
+					<div class="layui-input-block">
+						<input id="Email" type="text" name="Email" placeholder="请输入Email" class="layui-input"></input>
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">微博</label>
+					<div class="layui-input-block">
+						<input id="Weibo" type="text" name="Weibo" placeholder="请输入微博地址" class="layui-input"></input>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">简介</label>
+					<div class="layui-input-block">
+						<textarea id="Info" class="layui-textarea" name="Info" style="display: none"> </textarea>
+					</div>
+				</div>
+				<div class="layui-form-item">
+
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit="" lay-filter="btnsave">保存</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+		<script src="/media/layui/layui.js"></script>
+		<script type="text/javascript" src="/media/js/app.js" ></script>
+		<script src="/media/js/myinfo.js"></script>
+
+	</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>基本设置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <link rel="stylesheet" href="media/layui/css/layui.css">
+    <link rel="stylesheet" href="media/css/global.css">
+    <script src="media/js/jquery.min.js"></script>
+    <script src="media/js/jiazai.js"></script>
+    <script src="media/js/setside.js"></script>
+    <script>
+        $(function () {
+
+            $.get("queryLogin.do", function (data) {
+                var obj = data[0]
+                set(2,obj.id)
+                console.log(obj)
+                $("#_send").html(obj.sendnum)
+                $("#_reply").html(obj.replynum)
+                $("#_nickname").val(obj.nickname)
+                $("#_email").val(obj.email)
+                $("#_birthday").val(obj.birthday)
+                $("#_sign").text(obj.sign)
+                $("#_fans").html(obj.fans)
+                $("#_follow").html(obj.follow)
+                $("#_createtime").val(obj.createtime)
+                if (obj.sex == 1) {
+                    $("#sex").append("  <input type=\"radio\" name=\"sex\" value=\"1\" title=\"男\" checked>\n" +
+                        " <input type=\"radio\" name=\"sex\" value=\"0\" title=\"女\">")
+                }else  if (obj.sex==0){
+                    $("#sex").append("  <input type=\"radio\" name=\"sex\" value=\"1\" title=\"男\" >\n" +
+                        " <input type=\"radio\" name=\"sex\" value=\"0\" title=\"女\" checked>")
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+
+<section id="head"></section>
+
+<div class="layui-container fly-marginTop fly-user-main">
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user" id="side">
+    </ul>
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <div class="layui-tab-content" style="padding: 20px 0;">
+                <div class="layui-form layui-form-pane layui-tab-item layui-show">
+                    <form action="updateUser.do" method="post">
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">个人信息</div>
+                                <div class="layui-card-body layui-col-md12 ">
+                                    <div class="layui-col-md4">
+                                        <img src="/admin/media/images/1.jpg" class="layui-circle"
+                                             style="height: 200px;width: 200px;"><br><br>
+                                        <i class="layui-icon layui-icon-edit">发帖&nbsp;&nbsp;<span
+                                                id="_send">0</span></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <i class="layui-icon layui-icon-reply-fill">回复&nbsp;&nbsp;<span
+                                                id="_reply">0</span></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                                        <i class="layui-icon layui-icon-star-fill">关注&nbsp;&nbsp;<span
+                                                id="_follow">0</span></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <i class="layui-icon layui-icon-face-smile-fine">粉丝&nbsp;&nbsp;<span id="_fans">0</span></i>
+                                    </div>
+
+                                    <div class="layui-col-md8 layui-form-pane">
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">昵称</label>
+                                            <div class="layui-input-inline">
+                                                <input class="layui-input" name="nickname" id="_nickname">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">性别</label>
+                                            <div class="layui-input-inline" id="sex">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">出生年月</label>
+                                            <div class="layui-input-inline">
+                                                <input class="layui-input" type="text" name="birthday" id="_birthday">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">邮箱</label>
+                                            <div class="layui-input-inline">
+                                                <input class="layui-input" type="email" name="email" id="_email">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">加入日期</label>
+                                            <div class="layui-input-inline">
+                                                <input class="layui-input"  id="_createtime" readonly>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="layui-form-item layui-form-text"><br>
+                                        <label for="_sign" class="layui-form-label">签名</label>
+                                        <div class="layui-input-block">
+                                    <textarea placeholder="随便写些什么刷下存在感" id="_sign" name="sign" autocomplete="off"
+                                              class="layui-textarea" style="height: 80px;"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="footer"></section>
+
+<script src="media/layui/layui.js"></script>
+<script>
+    layui.cache.page = 'user';
+    layui.config({
+        version: "2.0.0"
+        , base: 'media/mods/'
+    }).extend({
+        fly: 'index'
+    }).use('fly');
+    layui.use(
+        ['form', 'laydate'],
+        function () {
+            var form = layui.form, layer = layui.layer, laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#_birthday'
+            });
+        });
+</script>
+
+</body>
+</html>

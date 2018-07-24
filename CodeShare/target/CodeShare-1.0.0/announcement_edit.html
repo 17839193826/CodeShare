@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>文章管理</title>
+		<!-- layui.css -->
+		<link href="/media/layui/css/layui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div style="padding: 25px 50px 25px 0px;">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<input type="text" id="lblid" name="lblid" placeholder="" autocomplete="off" readonly="true" class="layui-input layui-hide ">
+
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">公告级别</label>
+					<div class="layui-input-block">
+						<select id="articletype" name="articletype" lay-verify="required">
+							<option value="1">一般</option>
+							<option value="2">重要</option>
+							<option value="3">非常重要</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">公告内容</label>
+					<div class="layui-input-block">
+						<textarea id="articlecontent" class="layui-textarea" name="articlecontent" style="display: none"> </textarea>
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit="" lay-filter="btnsave">保存</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+		<script src="/media/layui/layui.js"></script>
+		<script type="text/javascript" src="/media/js/app.js" ></script>
+		<script src="/media/js/announcement_edit.js"></script>
+	</body>
+
+</html>
